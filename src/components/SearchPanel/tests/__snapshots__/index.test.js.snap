@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchPanel component matches the snapshot 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <SearchPanel
+    benefits={
+        Array [
+            Object {
+              "additionalQuestions": Array [],
+              "cardImage": "cardImage",
+              "categories": Array [],
+              "content": "content",
+              "description": "description",
+              "headerImage": "headerImage",
+              "id": "1",
+              "internalQuestions": "",
+              "links": Array [],
+              "logo": "logo",
+              "name": "name",
+              "services": Array [],
+              "slug": "slug",
+              "strapline": "strapline",
+              "themeColor": "#000",
+              "title": "title",
+            },
+          ]
+    }
+    bgColor="bgColor"
+    categories={
+        Array [
+            Object {
+              "benefits": Array [],
+              "cardImageArmy": "cardImageArmy",
+              "cardImageMarines": "cardImageMarines",
+              "cardImageNavy": "cardImageNavy",
+              "cardImageRaf": "cardImageRaf",
+              "categories": Array [],
+              "description": "description",
+              "id": "1",
+              "name": "name",
+              "slug": "slug",
+              "strapline": "strapline",
+              "subApps": Array [],
+            },
+          ]
+    }
+    history={
+        Object {
+            "push": [Function],
+          }
+    }
+    renderInputOnly={true}
+    service={
+        Object {
+            "cardImage": "cardImage",
+            "categories": Array [],
+            "headerImage": "headerImage",
+            "id": "1",
+            "name": "name",
+            "slug": "/",
+            "themeColor": "#000",
+          }
+    }
+    text="text"
+    title="title"
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "buttonText": "Search",
+      "onSubmit": [Function],
+      "options": Array [],
+      "placeholder": "Search benefits...",
+    },
+    "ref": null,
+    "rendered": null,
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "buttonText": "Search",
+        "onSubmit": [Function],
+        "options": Array [],
+        "placeholder": "Search benefits...",
+      },
+      "ref": null,
+      "rendered": null,
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
