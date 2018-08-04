@@ -1,9 +1,9 @@
 /**
- * Asynchronously loads the component for HomePage
+ * Asynchronously loads the component for LandingPage
  */
 import Loadable from 'react-loadable';
 
 export default Loadable({
   loader: () => import('./index'),
-  loading: () => null,
+  loading: () => null
 });

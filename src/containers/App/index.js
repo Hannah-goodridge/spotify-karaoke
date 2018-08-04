@@ -17,24 +17,25 @@ import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
 
 import HomePage from '../../containers/HomePage/Loadable';
+import LandingPage from '../../containers/LandingPage/Loadable';
 import NotFoundPage from '../../containers/NotFoundPage/Loadable';
 
 import { toJS } from '../../components/HOC/to-js';
 
-
-export class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class App extends React.PureComponent {
+  // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <React.Fragment>
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/landing" component={LandingPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </React.Fragment>
     );
   }
 }
-
 
 // App.propTypes = {
 

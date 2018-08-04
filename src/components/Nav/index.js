@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { toJS } from '../../components/HOC/to-js';
-import { toggleSearch } from '../../containers/App/actions';
-import { makeSelectSearchOpen,  } from '../../containers/App/selectors';
+// import { makeSelectSearchOpen,  } from '../../containers/App/selectors';
 
 import SearchPanel from '../../components/SearchPanel';
 
@@ -12,8 +11,10 @@ import ProfileIcon from '../../images/svg/profile.svg';
 import CloseIcon from '../../images/svg/cross-white.svg';
 import SearchIcon from '../../images/svg/search.svg';
 
-
 export class Nav extends React.PureComponent {
+  state = {
+    toggleSearch: false
+  };
 
   constructor(props) {
     super(props);
@@ -27,7 +28,18 @@ export class Nav extends React.PureComponent {
       }, 500);
     }
   }
+  toggleSearch() {
+    // const search = document.querySelector('.search');
+    // if(search.classList.contains('is-open')){
+    //   document.querySelector('.search').classList.remove('is-open');
+    // }else{
+    //   document.querySelector('.search').classList.add('is-open');
+    // }
 
+    this.setState({
+      toggleSearch: !this.state.toggleSearch
+    });
+  }
 
   handleLogout() {
     //logout user here
@@ -35,7 +47,7 @@ export class Nav extends React.PureComponent {
 
   isHome() {
     let homepage = false;
-    if (this.props.location.pathname === `/${this.props.service.slug}`) {
+    if (this.props.location.pathname === `/landing`) {
       homepage = true;
     }
     return homepage;
@@ -43,63 +55,52 @@ export class Nav extends React.PureComponent {
 
   toggleActive(type) {
     this.setState({
-      [`${type}Active`]: !this.state[`${type}Active`],
+      [`${type}Active`]: !this.state[`${type}Active`]
     });
   }
 
   render() {
-    const { service, onToggleSearch, searchOpen } = this.props;
-    const {  profileActive } = this.state;
+    const { toggleSearch } = this.state;
+    console.log(this.props);
 
     return (
       <React.Fragment>
-        <nav className={`header-nav ${this.isHome() ? 'is-home' : 'has-search'}`}>
+        <nav
+          className={`header-nav ${this.isHome() ? 'is-home' : 'has-search'}`}
+        >
           <ul role="menubar" className="nav-row nav-row-first">
             <li role="none" className="nav-item nav-item-logo">
-              <Link role="menuitem" className={`nav-link ${this.state.isActive ? 'is-active' : ''}`} to={`/${service.slug}`}>
-                <div style={{ backgroundImage: `url(${service.logo})` }} className={`nav-logo ${service.name.toLowerCase()}-logo`} alt={`${service.name}-logo`} ></div>
+              <Link role="menuitem" className={`nav-link `} to={`/`}>
+                <div
+                  style={{ backgroundImage: `url()` }}
+                  className={`nav-logo `}
+                  alt={`logo`}
+                />
               </Link>
             </li>
             <li role="none" className="nav-item nav-item-search">
               <a
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
-                  onToggleSearch();
+                  this.toggleSearch();
                 }}
                 href="/"
                 role="menuitem"
-                className={`nav-link ${searchOpen ? 'is-active' : ''}`}
+                className={`nav-link `}
               >
-                <span className="nav-icon icon-search"><SearchIcon /> </span>
-                <span className="nav-link-text">Search <span>benefits</span></span>
+                <span className="nav-icon icon-search"> </span>
+                <span className="nav-link-text">Search for tracks</span>
               </a>
             </li>
-
-            <li role="none" className="nav-item nav-item-profile">
-              <Link
-                onClick={() => {
-                  this.toggleActive('profile');
-                }
-                }
-                role="menuitem"
-                className={`nav-link ${profileActive ? 'is-active' : ''}`}
-                to={this.props.profileLink}
-              >
-                <span className="nav-icon icon-profile"><ProfileIcon /> </span>
-                <span className="nav-link-text">Profile</span>
-              </Link>
-            </li>
-
           </ul>
-          <div className={`header-searchbar ${searchOpen ? 'is-active' : ''}`}>
-            {searchOpen && (
+          <div className={`header-searchbar `}>
+            {this.state.toggleSearch && (
               <SearchPanel
                 bgColor={'bg-gray'}
-                title={'Welcome'}
-                text={'Explore all of your personal benefits, entitlements and allowances.'}
-                service={service}
-                hasSubmitted={onToggleSearch}
-                renderInputOnly
+                text={
+                  'Explore all of your personal benefits, entitlements and allowances.'
+                }
+                token={this.props.token}
               />
             )}
           </div>
@@ -109,24 +110,18 @@ export class Nav extends React.PureComponent {
   }
 }
 
-Nav.propTypes = {
-  profileLink: PropTypes.string,
-  location: PropTypes.object,
-  onToggleSearch: PropTypes.func.isRequired,
-  searchOpen: PropTypes.bool.isRequired,
-};
+Nav.propTypes = {};
 
+// const mapStateToProps = (state) => {
+//   const searchOpen = makeSelectSearchOpen(state);
+//   return {
+//     searchOpen,
+//   };
+// };
 
-const mapStateToProps = (state) => {
-  const searchOpen = makeSelectSearchOpen(state);
-  return {
-    searchOpen,
-  };
-};
+// const mapDispatchToProps = (dispatch) => ({
 
-const mapDispatchToProps = (dispatch) => ({
+//   onToggleSearch: () => dispatch(toggleSearch()),
+// });
 
-  onToggleSearch: () => dispatch(toggleSearch()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(toJS(withRouter(Nav)));
+export default toJS(withRouter(Nav));

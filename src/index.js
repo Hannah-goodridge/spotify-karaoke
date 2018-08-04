@@ -20,14 +20,12 @@ import App from './containers/App';
 import './styles/main.css';
 //import ThemeProvider from './containers/ThemeProvider';
 
-
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
 
 /* eslint-enable import/no-unresolved, import/extensions */
 
 import configureStore from './configureStore';
-console.log(App);
 // Import i18n messages
 
 // Create redux store with history
@@ -40,19 +38,14 @@ history.listen(() => {
   window.scrollTo(0, 0);
 });
 
-
 ReactDOM.render(
   <Provider store={store}>
-
     <ConnectedRouter history={history}>
       <App />
     </ConnectedRouter>
-
   </Provider>,
   MOUNT_NODE
 );
-
-
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,
@@ -77,12 +70,12 @@ if (process.env.NODE_ENV === 'production') {
       },
       onUpdated: () => {
         window.location.reload();
-      },
+      }
     });
   };
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then((registrations) => {
+    navigator.serviceWorker.getRegistrations().then(registrations => {
       if (registrations.length > 0) {
         runInstall();
       } else {
