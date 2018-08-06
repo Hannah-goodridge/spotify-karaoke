@@ -21,6 +21,12 @@ export class SearchPanel extends React.Component {
       myTracks: []
     };
     this.handleSearch = this.handleSearch.bind(this);
+    this.storeTrack = this.storeTrack.bind(this);
+  }
+
+  storeTrack(track) {
+    console.log(track);
+    localStorage.setItem('tracks', JSON.stringify(track));
   }
 
   getSearchValue(value, token) {
@@ -28,37 +34,55 @@ export class SearchPanel extends React.Component {
       searchValue: value
     });
     this.handleSearch(value, token);
-    console.log(value);
+  }
+
+  clearResults() {
+    this.setState({ tracks: {} });
   }
 
   getResults() {
     let tracks = this.state.tracks;
-    let track;
 
-    return Object.keys(tracks).map(function(key, items) {
-      track = tracks[key];
+    if (tracks.length) {
+      return Object.keys(tracks).map((key, items) => {
+        let track = tracks[key];
 
-      return (
-        <React.Fragment>
-          <div data-id={track.id} data-uri={track.uri} data-link={track.href}>
-            {' '}
+        return (
+          <div
+            key={`${items}-wrap`}
+            data-id={track.id}
+            data-uri={track.uri}
+            data-link={track.href}
+          >
             <img
-              width="50px"
-              height="50px"
+              key={`${items}-img`}
+              width="40px"
+              height="40px"
               src={track.album.images[0].url}
               alt=""
-            />{' '}
-            <span>{track.name} </span> by <span>{track.artists[0].name}</span>
+            />
+            <span key={`${items}-track-name`}>
+              {items + 1} {track.name}{' '}
+            </span>{' '}
+            by{' '}
+            <span key={`${items}-artists-name`}>{track.artists[0].name}</span>
+            <button
+              key={`${items}-button`}
+              onClick={() => this.storeTrack(track)}
+            >
+              +
+            </button>
           </div>
-        </React.Fragment>
-      );
-    });
+        );
+      });
+    } else {
+      return;
+    }
   }
 
   handleSearch = (value, token) => {
     const encoded = encodeURIComponent(value);
     let url = `${spotifySearchURL}${encoded}&type=track`;
-    console.log(url);
 
     const params = {
       headers: {
@@ -73,13 +97,9 @@ export class SearchPanel extends React.Component {
       .get(url, params)
       .then(response => {
         this.setState({ tracks: response.data.tracks.items });
-
-        console.log(response.data.tracks.items);
       })
 
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(error => {});
   };
 
   render() {
@@ -90,6 +110,13 @@ export class SearchPanel extends React.Component {
           value={this.state.searchValue}
           onChange={value => this.getSearchValue(value, this.props.token)}
         />
+        <button
+          onClick={e => {
+            this.clearResults();
+          }}
+        >
+          Clear search
+        </button>
 
         {this.getResults()}
       </div>

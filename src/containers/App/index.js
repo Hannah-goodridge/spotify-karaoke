@@ -28,8 +28,16 @@ export class App extends React.PureComponent {
     return (
       <React.Fragment>
         <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/landing" component={LandingPage} />
+          <Route
+            exact
+            path="https://hannah-goodridge.github.io/spotify-karaoke/"
+            component={HomePage}
+          />
+          <Route
+            exact
+            path="https://hannah-goodridge.github.io/spotify-karaoke/landing"
+            component={LandingPage}
+          />
           <Route component={NotFoundPage} />
         </Switch>
       </React.Fragment>

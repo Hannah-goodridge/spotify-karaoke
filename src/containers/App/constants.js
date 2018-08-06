@@ -9,5 +9,5 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-
-export const TOGGLE_SEARCH = 'mod/App/TOGGLE_SEARCH';
+export const TOGGLE_SEARCH = 'src/App/TOGGLE_SEARCH';
+export const ADDTRACK = 'src/App/ADDTRACK';
