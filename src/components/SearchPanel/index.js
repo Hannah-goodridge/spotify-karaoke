@@ -1,13 +1,8 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import axios from 'axios';
-import SearchInput, { createFilter } from 'react-search-input';
-import {
-  spotifySearchURL,
-  token,
-  clientID,
-  clientSecret
-} from '../../constants';
+import SearchInput from 'react-search-input';
+import { spotifySearchURL } from '../../constants';
 
 export class SearchPanel extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
@@ -24,9 +19,20 @@ export class SearchPanel extends React.Component {
     this.storeTrack = this.storeTrack.bind(this);
   }
 
-  storeTrack(track) {
-    console.log(track);
-    localStorage.setItem('tracks', JSON.stringify(track));
+  storeTrack(e, track) {
+    if (e.target.classList.contains('queued')) {
+      e.target.classList.remove('queued');
+      const index = this.state.myTracks.indexOf(track);
+      this.state.myTracks.splice(index, 1);
+      this.setState({ myTracks: this.state.myTracks });
+    } else {
+      e.target.classList.add('queued');
+      if (this.state.myTracks.includes(track)) {
+        alert('already in there bitches');
+        return;
+      }
+      this.setState({ myTracks: [...this.state.myTracks, ...[track]] });
+    }
   }
 
   getSearchValue(value, token) {
@@ -67,8 +73,9 @@ export class SearchPanel extends React.Component {
             by{' '}
             <span key={`${items}-artists-name`}>{track.artists[0].name}</span>
             <button
+              className={`btn`}
               key={`${items}-button`}
-              onClick={() => this.storeTrack(track)}
+              onClick={e => this.storeTrack(e, track)}
             >
               +
             </button>
@@ -111,6 +118,7 @@ export class SearchPanel extends React.Component {
           onChange={value => this.getSearchValue(value, this.props.token)}
         />
         <button
+          className="btn"
           onClick={e => {
             this.clearResults();
           }}
@@ -123,5 +131,9 @@ export class SearchPanel extends React.Component {
     );
   }
 }
+
+SearchPanel.propTypes = {
+  token: PropTypes.string.isRequired
+};
 
 export default SearchPanel;

@@ -1,7 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withRouter, Link } from 'react-router-dom';
-import { token } from '../../constants';
+//import PropTypes from 'prop-types';
 
 export class Player extends React.PureComponent {
   state = {
@@ -34,9 +32,7 @@ export class Player extends React.PureComponent {
       });
 
       // Playback status updates
-      player.addListener('player_state_changed', state => {
-        console.log(state);
-      });
+      player.addListener('player_state_changed', state => {});
 
       // Ready
       player.addListener('ready', ({ device_id }) => {

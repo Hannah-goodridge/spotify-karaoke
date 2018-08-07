@@ -10,10 +10,10 @@
  */
 
 import React from 'react';
-import { withRouter } from 'react-router';
-import Head from '.././../components/Head';
+import { withRouter, Link } from 'react-router-dom';
+import Page from '.././../components/Page';
 import Nav from '.././../components/Nav';
-import Player from '.././../components/Player';
+import PageIntro from '.././../components/PageIntro';
 //import PropTypes from 'prop-types';
 
 export class LandingPage extends React.PureComponent {
@@ -29,7 +29,6 @@ export class LandingPage extends React.PureComponent {
   componentDidMount = () => {
     let url = window.location.href;
     let token = this.props.history.location.state.auth.authToken;
-    console.log(token);
 
     this.setState({ authToken: token });
   };
@@ -50,14 +49,19 @@ export class LandingPage extends React.PureComponent {
     const token = this.state.authToken;
 
     return (
-      <div>
-        <Head />
+      <Page title={'Spotify Karaoke'}>
         <Nav token={token} />
-        <h1>Spotify Karaoke LandingPage</h1>
-        <h2>This is the landing page</h2>
-        <Player />
+        <PageIntro
+          title={'Spotify Karaoke'}
+          subtitle={`Once you've chosen your track click the button below to start singing.`}
+        />
+        <Link className="btn" to={'/sing'}>
+          Start singing!
+        </Link>
+
         <ul>
           <li>we need to search/get tracks</li>
+          <li>add/remove to 'queue' check if track is already exsiting</li>
           <li>play audio</li>
           <li>get the lyrics</li>
           <li>accept multiple audio input- hard</li>
@@ -70,7 +74,7 @@ export class LandingPage extends React.PureComponent {
           <li>you'll need a room key and page for login</li>
           <li>you'll need a singing page</li>
         </ul>
-      </div>
+      </Page>
     );
   }
 }

@@ -1,0 +1,22 @@
+.nav{
+    //padding: 40px;
+    //background: $white;
+    border-bottom: 1px solid $white;
+    display: block;
+    margin-bottom: 40px;
+}
+
+.nav-link{
+    padding: 18px 12px;
+    position: relative;
+    text-decoration: none;
+    height: 100%;
+    cursor: pointer;
+    color: $black;
+    font-size: 1.4rem;
+}
+
+.nav-item-logo{
+    width: 80px;
+    height: 80px;
+}

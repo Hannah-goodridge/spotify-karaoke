@@ -1,15 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+
 import { toJS } from '../../components/HOC/to-js';
-// import { makeSelectSearchOpen,  } from '../../containers/App/selectors';
+import Logo from '../../images/svg/logo.svg';
 
 import SearchPanel from '../../components/SearchPanel';
-
-import ProfileIcon from '../../images/svg/profile.svg';
-import CloseIcon from '../../images/svg/cross-white.svg';
-import SearchIcon from '../../images/svg/search.svg';
 
 export class Nav extends React.PureComponent {
   state = {
@@ -61,21 +57,14 @@ export class Nav extends React.PureComponent {
 
   render() {
     const { toggleSearch } = this.state;
-    console.log(this.props);
 
     return (
       <React.Fragment>
-        <nav
-          className={`header-nav ${this.isHome() ? 'is-home' : 'has-search'}`}
-        >
+        <nav className={`nav ${this.isHome() ? 'is-home' : 'has-search'}`}>
           <ul role="menubar" className="nav-row nav-row-first">
             <li role="none" className="nav-item nav-item-logo">
               <Link role="menuitem" className={`nav-link `} to={`/`}>
-                <div
-                  style={{ backgroundImage: `url()` }}
-                  className={`nav-logo `}
-                  alt={`logo`}
-                />
+                <img src={Logo} alt="" />
               </Link>
             </li>
             <li role="none" className="nav-item nav-item-search">
@@ -89,7 +78,6 @@ export class Nav extends React.PureComponent {
                 className={`nav-link `}
               >
                 <span className="nav-icon icon-search"> </span>
-                <span className="nav-link-text">Search for tracks</span>
               </a>
             </li>
           </ul>

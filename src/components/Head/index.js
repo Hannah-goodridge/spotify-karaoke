@@ -12,8 +12,6 @@ export class Head extends React.PureComponent {
       } else {
         window.onSpotifyWebPlaybackSDKReady = resolve;
       }
-
-      console.log(window.Spotify, window.onSpotifyWebPlaybackSDKReady);
     });
   };
 

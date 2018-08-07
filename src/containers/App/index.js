@@ -18,6 +18,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 
 import HomePage from '../../containers/HomePage/Loadable';
 import LandingPage from '../../containers/LandingPage/Loadable';
+import SingingPage from '../../containers/SingingPage/Loadable';
 import NotFoundPage from '../../containers/NotFoundPage/Loadable';
 
 import { toJS } from '../../components/HOC/to-js';
@@ -28,16 +29,9 @@ export class App extends React.PureComponent {
     return (
       <React.Fragment>
         <Switch>
-          <Route
-            exact
-            path="https://hannah-goodridge.github.io/spotify-karaoke/"
-            component={HomePage}
-          />
-          <Route
-            exact
-            path="https://hannah-goodridge.github.io/spotify-karaoke/landing"
-            component={LandingPage}
-          />
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/landing" component={LandingPage} />
+          <Route exact path="/sing" component={SingingPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </React.Fragment>

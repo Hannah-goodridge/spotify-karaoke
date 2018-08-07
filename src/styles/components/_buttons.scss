@@ -2,4 +2,34 @@ button{
     padding: 20px;
     border: 0;
     background-color: $green;
+    text-decoration: none;
+    color: white;
+}
+
+.btn{
+    padding: 15px 20px;
+    background-color: $dark-gray;
+    border-radius: 25px;
+    border: 1px solid $white;
+    text-decoration: none;
+    color: $white;
+    font-size: 1.4rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 150ms ease-out, color 150ms ease-out, border-color 150ms ease-out;
+    min-width: 250px;
+    display: inline-block;
+    width: auto;
+    font-weight: $font-weight-regular;
+
+    &:hover {
+        background-color: $green;
+        color: $dark-gray;
+        border: 1px solid $green;
+    }
+
+}
+
+.btn-block{
+    display: block;
 }
